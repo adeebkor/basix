@@ -119,13 +119,22 @@ basix::make_quadrature(const char* rule, const char* cell_type, int order)
   return basix::quadrature::make_quadrature(rule, ct, order);
 }
 
-Eigen::Array<double, Eigen::Dynamic, 1> basix::map_push_forward_real(
-    int handle, const Eigen::Array<double, Eigen::Dynamic, 1>& reference_data,
-    const Eigen::MatrixXd& J, double detJ, const Eigen::MatrixXd& K)
+std::function<std::vector<double>(const std::vector<double>&,
+                                  const std::vector<double>&, const double,
+                                  const std::vector<double>&)>
+basix::get_forward_map_real(int handle)
 {
   check_handle(handle);
-  return _registry[handle]->map_push_forward<double>(reference_data, J, detJ,
-                                                     K);
+  return _registry[handle]->get_forward_map<double>();
+}
+
+std::function<std::vector<std::complex<double>>(
+    const std::vector<std::complex<double>>&, const std::vector<double>&,
+    const double, const std::vector<double>&)>
+basix::get_forward_map_complex(int handle)
+{
+  check_handle(handle);
+  return _registry[handle]->get_forward_map<std::complex<double>>();
 }
 
 Eigen::Array<double, Eigen::Dynamic, 1> basix::map_pull_back_real(
@@ -134,17 +143,6 @@ Eigen::Array<double, Eigen::Dynamic, 1> basix::map_pull_back_real(
 {
   check_handle(handle);
   return _registry[handle]->map_pull_back<double>(physical_data, J, detJ, K);
-}
-
-Eigen::Array<std::complex<double>, Eigen::Dynamic, 1>
-basix::map_push_forward_complex(
-    int handle,
-    const Eigen::Array<std::complex<double>, Eigen::Dynamic, 1>& reference_data,
-    const Eigen::MatrixXd& J, double detJ, const Eigen::MatrixXd& K)
-{
-  check_handle(handle);
-  return _registry[handle]->map_push_forward<std::complex<double>>(
-      reference_data, J, detJ, K);
 }
 
 Eigen::Array<std::complex<double>, Eigen::Dynamic, 1>

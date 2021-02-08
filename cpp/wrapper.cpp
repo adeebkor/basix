@@ -3,6 +3,7 @@
 // SPDX-License-Identifier:    MIT
 
 #include <pybind11/eigen.h>
+#include <pybind11/functional.h>
 #include <pybind11/operators.h>
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
@@ -190,7 +191,7 @@ Each element has a `tabulate` function which returns the basis functions and a n
 
   py::class_<FiniteElement>(m, "FiniteElement", "Finite Element")
       .def("tabulate", &FiniteElement::tabulate, tabdoc.c_str())
-      .def("map_push_forward", &FiniteElement::map_push_forward<double>,
+      .def("get_forward_map", &FiniteElement::get_forward_map<double>,
            mapdoc.c_str())
       .def("map_pull_back", &FiniteElement::map_pull_back<double>,
            invmapdoc.c_str())

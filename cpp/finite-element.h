@@ -232,13 +232,12 @@ public:
   /// @param K The inverse of the Jacobian of the mapping
   /// @return The function value on the cell
   template <typename T>
-  Eigen::Array<T, Eigen::Dynamic, 1>
-  map_push_forward(const Eigen::Array<T, Eigen::Dynamic, 1>& reference_data,
-                   const Eigen::MatrixXd& J, double detJ,
-                   const Eigen::MatrixXd& K) const
+  std::function<std::vector<T>(const std::vector<T>&,
+                               const std::vector<double>&, const double,
+                               const std::vector<double>&)>
+  get_forward_map() const
   {
-    return mapping::map_push_forward<T>(reference_data, J, detJ, K,
-                                        _mapping_type, _value_shape);
+    return mapping::get_forward_map<T>(_mapping_type, _value_shape);
   }
 
   /// Map a function value from a physical cell to the reference

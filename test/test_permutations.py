@@ -134,7 +134,7 @@ def test_permutation_of_tabulated_data_triangle(element_name, order):
         mapped_values = np.zeros_like(reflected_values)
         for i, value in enumerate(reflected_values):
             for j in range(e.dim):
-                mapped_values[i, j::e.dim] = e.map_push_forward(value[j::e.dim], J, detJ, K)
+                mapped_values[i, j::e.dim] = e.get_forward_map()(value[j::e.dim], J.flatten(), detJ, K.flatten())
 
         for i, j in zip(values, mapped_values):
             for d in range(e.value_size):
@@ -166,7 +166,7 @@ def test_permutation_of_tabulated_data_quadrilateral(element_name, order):
         mapped_values = np.zeros_like(reflected_values)
         for i, value in enumerate(reflected_values):
             for j in range(e.dim):
-                mapped_values[i, j::e.dim] = e.map_push_forward(value[j::e.dim], J, detJ, K)
+                mapped_values[i, j::e.dim] = e.get_forward_map()(value[j::e.dim], J.flatten(), detJ, K.flatten())
 
         for i, j in zip(values, mapped_values):
             for d in range(e.value_size):
@@ -204,7 +204,7 @@ def test_permutation_of_tabulated_data_tetrahedron(element_name, order):
         mapped_values = np.zeros_like(reflected_values)
         for i, value in enumerate(reflected_values):
             for j in range(e.dim):
-                mapped_values[i, j::e.dim] = e.map_push_forward(value[j::e.dim], J, detJ, K)
+                mapped_values[i, j::e.dim] = e.get_forward_map()(value[j::e.dim], J.flatten(), detJ, K.flatten())
 
         for i, j in zip(values, mapped_values):
             for d in range(e.value_size):
@@ -226,7 +226,7 @@ def test_permutation_of_tabulated_data_tetrahedron(element_name, order):
         mapped_values = np.zeros_like(rotated_values)
         for i, value in enumerate(rotated_values):
             for j in range(e.dim):
-                mapped_values[i, j::e.dim] = e.map_push_forward(value[j::e.dim], J, detJ, K)
+                mapped_values[i, j::e.dim] = e.get_forward_map()(value[j::e.dim], J.flatten(), detJ, K.flatten())
 
         for i, j in zip(values, mapped_values):
             for d in range(e.value_size):
@@ -246,7 +246,7 @@ def test_permutation_of_tabulated_data_tetrahedron(element_name, order):
         mapped_values = np.zeros_like(reflected_values)
         for i, value in enumerate(reflected_values):
             for j in range(e.dim):
-                mapped_values[i, j::e.dim] = e.map_push_forward(value[j::e.dim], J, detJ, K)
+                mapped_values[i, j::e.dim] = e.get_forward_map()(value[j::e.dim], J.flatten(), detJ, K.flatten())
 
         for i, j in zip(values, mapped_values):
             for d in range(e.value_size):
@@ -283,7 +283,7 @@ def test_permutation_of_tabulated_data_hexahedron(element_name, order):
         mapped_values = np.zeros_like(reflected_values)
         for i, value in enumerate(reflected_values):
             for j in range(e.dim):
-                mapped_values[i, j::e.dim] = e.map_push_forward(value[j::e.dim], J, detJ, K)
+                mapped_values[i, j::e.dim] = e.get_forward_map()(value[j::e.dim], J.flatten(), detJ, K.flatten())
 
         for i, j in zip(values, mapped_values):
             for d in range(e.value_size):
@@ -305,7 +305,7 @@ def test_permutation_of_tabulated_data_hexahedron(element_name, order):
         mapped_values = np.zeros_like(rotated_values)
         for i, value in enumerate(rotated_values):
             for j in range(e.dim):
-                mapped_values[i, j::e.dim] = e.map_push_forward(value[j::e.dim], J, detJ, K)
+                mapped_values[i, j::e.dim] = e.get_forward_map()(value[j::e.dim], J.flatten(), detJ, K.flatten())
 
         for i, j in zip(values, mapped_values):
             for d in range(e.value_size):
@@ -325,7 +325,7 @@ def test_permutation_of_tabulated_data_hexahedron(element_name, order):
         mapped_values = np.zeros_like(reflected_values)
         for i, value in enumerate(reflected_values):
             for j in range(e.dim):
-                mapped_values[i, j::e.dim] = e.map_push_forward(value[j::e.dim], J, detJ, K)
+                mapped_values[i, j::e.dim] = e.get_forward_map()(value[j::e.dim], J.flatten(), detJ, K.flatten())
 
         for i, j in zip(values, mapped_values):
             for d in range(e.value_size):

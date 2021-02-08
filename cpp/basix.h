@@ -30,9 +30,10 @@ std::vector<Eigen::ArrayXXd> tabulate(int handle, int nd,
 /// @param[in] K The inverse of the Jacobian of the map to the cell (evaluated
 /// at the point)
 /// @return The data on the physical cell at the corresponding point
-Eigen::Array<double, Eigen::Dynamic, 1> map_push_forward_real(
-    int handle, const Eigen::Array<double, Eigen::Dynamic, 1>& reference_data,
-    const Eigen::MatrixXd& J, double detJ, const Eigen::MatrixXd& K);
+std::function<std::vector<double>(const std::vector<double>&,
+                                  const std::vector<double>&, const double,
+                                  const std::vector<double>&)>
+get_forward_map_real(int handle);
 
 /// Map a function value from the reference to a physical cell
 /// @param[in] handle The handle of the basix element
@@ -43,10 +44,10 @@ Eigen::Array<double, Eigen::Dynamic, 1> map_push_forward_real(
 /// @param[in] K The inverse of the Jacobian of the map to the cell (evaluated
 /// at the point)
 /// @return The data on the physical cell at the corresponding point
-Eigen::Array<std::complex<double>, Eigen::Dynamic, 1> map_push_forward_complex(
-    int handle,
-    const Eigen::Array<std::complex<double>, Eigen::Dynamic, 1>& reference_data,
-    const Eigen::MatrixXd& J, double detJ, const Eigen::MatrixXd& K);
+std::function<std::vector<std::complex<double>>(
+    const std::vector<std::complex<double>>&, const std::vector<double>&,
+    const double, const std::vector<double>&)>
+get_forward_map_complex(int handle);
 
 /// Map a function value from a physical cell to the reference
 /// @param[in] handle The handle of the basix element
